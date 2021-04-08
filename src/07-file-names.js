@@ -13,8 +13,17 @@
  * the output should be ["file", "file(1)", "image", "file(1)(1)", "file(2)"]
  *
  */
-function renameFiles(/* names */) {
-  throw new Error('Not implemented');
+function renameFiles(names) {
+  const result = [];
+  for (let i = 0; i < names.length; i++) {
+    if (result.filter((e) => e === names[i]).length === 0) {
+      result.push(names[i]);
+    } else if ((result.filter((e) => e === names[i]).length > 0) && (result.filter((e) => e === `${names[i]}(1)`).length === 0)) {
+      result.push(`${names[i]}(1)`);
+    } else if ((result.filter((e) => e === names[i]).length > 0) && (result.filter((e) => e === `${names[i]}(1)`).length > 0)) {
+      result.push(`${names[i]}(2)`);
+    }
+  }
+  return result;
 }
-
 module.exports = renameFiles;
