@@ -21,8 +21,83 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+
+function countMines(i, k, matrix) {
+  let count = 0;
+  let error = 0;
+  try {
+    if (matrix[i - 1][k - 1]) {
+      count++;
+    }
+  } catch (e) {
+    error++;
+  }
+  try {
+    if (matrix[i - 1][k]) {
+      count++;
+    }
+  } catch (e) {
+    error++;
+  }
+  try {
+    if (matrix[i - 1][k + 1]) {
+      count++;
+    }
+  } catch (e) {
+    error++;
+  }
+  try {
+    if (matrix[i][k + 1]) {
+      count++;
+    }
+  } catch (e) {
+    error++;
+  }
+  try {
+    if (matrix[i + 1][k + 1]) {
+      count++;
+    }
+  } catch (e) {
+    error++;
+  }
+  try {
+    if (matrix[i + 1][k]) {
+      count++;
+    }
+  } catch (e) {
+    error++;
+  }
+  try {
+    if (matrix[i + 1][k - 1]) {
+      count++;
+    }
+  } catch (e) {
+    error++;
+  }
+  try {
+    if (matrix[i][k - 1]) {
+      count++;
+    }
+  } catch (e) {
+    error++;
+  }
+  if (error) {
+    error++;
+  }
+  return count;
+}
+
+function minesweeper(matrix) {
+  const res = [];
+  for (let i = 0; i < matrix.length; i++) {
+    res.push([]);
+  }
+  for (let i = 0; i < matrix.length; i++) {
+    for (let k = 0; k < matrix[i].length; k++) {
+      res[i][k] = countMines(i, k, matrix);
+    }
+  }
+  return res;
 }
 
 module.exports = minesweeper;
